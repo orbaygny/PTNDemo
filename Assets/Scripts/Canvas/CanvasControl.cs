@@ -30,7 +30,7 @@ public class CanvasControl : MonoBehaviour
     public void CloseProductionMenu()
     {
         productionMenu.SetActive(false);
-       // openProductMenu_Btn.SetActive(true);
+        openProductMenu_Btn.SetActive(true);
         closeProductMenu_Btn.SetActive(false);
 
     }
@@ -38,6 +38,12 @@ public class CanvasControl : MonoBehaviour
     public void OpenProdictionButton()
     {
         openProductMenu_Btn.SetActive(true);
+    }
+
+    public void HideProductionButton()
+    {
+        productionMenu.SetActive(false);
+        closeProductMenu_Btn.SetActive(false);
     }
     #endregion
 

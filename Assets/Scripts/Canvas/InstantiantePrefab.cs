@@ -17,6 +17,6 @@ public class InstantiantePrefab : MonoBehaviour
     void CreatePrefab()
     {
         Instantiate(buildingPrefab);
-        CanvasControl.Instance.CloseProductionMenu();
+        CanvasControl.Instance.HideProductionButton();
     }
 }

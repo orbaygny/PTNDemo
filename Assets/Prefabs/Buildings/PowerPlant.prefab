@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 6163824175311631345}
   - component: {fileID: 3155574196981305648}
   - component: {fileID: 44118627208121389}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PowerPlant
   m_TagString: Building
   m_Icon: {fileID: 0}
@@ -316,5 +316,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.99, y: 0.99}
   m_EdgeRadius: 0

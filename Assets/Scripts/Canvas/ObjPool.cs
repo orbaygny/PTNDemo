@@ -81,7 +81,6 @@ public class ObjPool : MonoBehaviour
                 buttonPool[tag].RemoveLast();
                 obj.transform.SetParent(transform);
                 obj.transform.SetAsFirstSibling();
-                //buttonPool[tag].AddLast(obj);
                 obj.SetActive(true);
                 break;
 
@@ -92,9 +91,7 @@ public class ObjPool : MonoBehaviour
                 buttonPool[tag].RemoveFirst();
                 _obj.transform.SetParent(transform);
                 _obj.transform.SetAsLastSibling();
-                //buttonPool[tag].AddLast(obj);
                 _obj.SetActive(true);
-
                 break;
                 
         }

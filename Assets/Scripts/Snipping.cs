@@ -9,8 +9,6 @@ public class Snipping : MonoBehaviour
     public Transform snapCell;
     private Vector3 pos;
 
-   
-    [SerializeField] private int gridCount;
 
     private float min_X, max_X, min_Y, max_Y;
 
@@ -28,7 +26,6 @@ public class Snipping : MonoBehaviour
     {
         _renderer = GetComponent<SpriteRenderer>();
         canPlace = true;
-        gridCount = 0;
         pos.z = 0;
         pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = pos;
@@ -76,36 +73,41 @@ public class Snipping : MonoBehaviour
             Destroy(gameObject);
         }
 
-      
 
-        pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        
-        pos.z = 0;
 
-        if(snapCell != null && Input.mousePosition == mousePos)
+           pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+           pos.z = 0;
+
+        if (snapCell != null && Input.mousePosition == mousePos && Input.GetButton("Snap")) 
+           {
+               if((transform.localScale.x / 8)%2 == 0)
+               {
+                   pos.x = snapCell.transform.position.x - 4;
+               }
+               else
+               {
+                   pos.x = snapCell.transform.position.x ;
+               }
+               if((transform.localScale.y / 8) % 2 == 0)
+               {
+                   pos.y = snapCell.transform.position.y - 4;
+               }
+               else
+               {
+                   pos.y = snapCell.transform.position.y;
+               }
+               pos.x = Mathf.Clamp(pos.x, min_X, max_X);
+               pos.y = Mathf.Clamp(pos.y, min_Y, max_Y);
+               transform.position = pos;
+           }
+
+        if (!Input.GetButton("Snap"))
         {
-            if((transform.localScale.x / 8)%2 == 0)
-            {
-                pos.x = snapCell.transform.position.x - 4;
-            }
-            else
-            {
-                pos.x = snapCell.transform.position.x ;
-            }
-            if((transform.localScale.y / 8) % 2 == 0)
-            {
-                pos.y = snapCell.transform.position.y - 4;
-            }
-            else
-            {
-                pos.y = snapCell.transform.position.y;
-            }
-            pos.x = Mathf.Clamp(pos.x, min_X, max_X);
-            pos.y = Mathf.Clamp(pos.y, min_Y, max_Y);
-            transform.position = pos;
+             pos.x = Mathf.Clamp(pos.x, min_X, max_X);
+             pos.y = Mathf.Clamp(pos.y, min_Y, max_Y);
+             transform.position = pos;
         }
-    
-      
 
         mousePos = Input.mousePosition;
 
@@ -113,27 +115,16 @@ public class Snipping : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Grid"))
-        {
-            gridCount++;
-        }
-
+       
         if (collision.gameObject.CompareTag("Building"))
         {
             canPlace = false;
-           
-            
         }
 
        
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Grid"))
-        {
-            gridCount--;
-        }
-
         if (collision.gameObject.CompareTag("Building"))
         {
             canPlace = true;

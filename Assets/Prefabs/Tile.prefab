@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 8380354826738318903}
   - component: {fileID: 2016739188132865406}
   - component: {fileID: 8080019151437232218}
+  - component: {fileID: 6415394435947864242}
   m_Layer: 0
-  m_Name: Square (1)
+  m_Name: Tile
   m_TagString: Grid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,10 +97,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 459cfbd8a39ad5147bb8e85df6f1c34d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 0.27450982}
-  offsetColor: {r: 0.8679245, g: 0.8679245, b: 0.8679245, a: 0.27450982}
+  baseColor: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 0.39215687}
+  offsetColor: {r: 0.764151, g: 0.764151, b: 0.764151, a: 0.39215687}
   hLightColor: {r: 0.12646852, g: 0.789645, b: 0.9245283, a: 0.6862745}
   _renderer: {fileID: 8380354826738318903}
+  gridX: 0
+  gridY: 0
+  gCost: 0
+  hcost: 0
+  walkable: 1
+  prnt: {fileID: 0}
+  neighbours: []
 --- !u!61 &8080019151437232218
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -110,7 +118,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -126,3 +134,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &6415394435947864242
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8380354826738318902}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

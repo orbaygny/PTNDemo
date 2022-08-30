@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 2090445216620771595}
   - component: {fileID: 2090445216620771594}
   - component: {fileID: 2090445216620771637}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Barrack
   m_TagString: Building
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.99, y: 0.99}
   m_EdgeRadius: 0
 --- !u!50 &2090445216620771637
 Rigidbody2D:
