@@ -10,8 +10,10 @@ public class CanvasControl : MonoBehaviour
     [SerializeField] private GameObject productionMenu;
     [SerializeField] private GameObject openProductMenu_Btn;
     [SerializeField] private GameObject closeProductMenu_Btn;
-   
+    [SerializeField] private GameObject informationMenu;
 
+     public GameObject unit;
+     public Vector3 spawnPos;
 
 
     #region Production Menu Button Functions
@@ -47,6 +49,31 @@ public class CanvasControl : MonoBehaviour
     }
     #endregion
 
+    #region InformationPanel
+    public void OpenInformation()
+    {
+        informationMenu.SetActive(true);
+    }
 
+    public void CloseInformation()
+    {
+        informationMenu.SetActive(false);
+        unit = null;
+        spawnPos = Vector3.zero;
+    }
+
+    public void CreateUnit()
+    {
+        Instantiate(unit, spawnPos, Quaternion.identity);
+    }
+
+    public void Select(GameObject unit, Vector3 spawnPos)
+    {
+        this.unit = unit;
+        this.spawnPos = spawnPos;
+    }
+  
+
+    #endregion
 
 }

@@ -16,6 +16,7 @@ public class WorldCreator : MonoBehaviour
 
     private void Awake()
     {
+        Application.targetFrameRate = 60;
         Instance = this;
         pointer = 1;
         CalculateAspectRatio();
@@ -35,6 +36,8 @@ public class WorldCreator : MonoBehaviour
     }
     void GenerateGrid()
     {
+        //Calculations based on 16:9 default aspect ratio
+
         for (int x = 0; x < (int)(witdth * 2 * (9f / height)); x++)
         {
             for (int y = 0; y < (int)(height * 2 * (9f / height)); y++)
@@ -53,11 +56,13 @@ public class WorldCreator : MonoBehaviour
 
     public void CalculateAspectRatio()
     {
+        // Converting aspect float to aspect ratio
         float tmp = Camera.main.aspect * pointer;
         if (tmp - (int)tmp == 0)
         {
             if (tmp == 8)
             {
+                // 16:10 is exceptional for this calculation, this part for fix that
                 tmp = 16;
                 pointer = 10;
             }

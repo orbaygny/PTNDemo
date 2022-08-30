@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Tile : MonoBehaviour
+public class Tile : MonoBehaviour, IPointerEnterHandler,IPointerExitHandler
 {
     [SerializeField] private Color baseColor,offsetColor,hLightColor;
     [SerializeField] private SpriteRenderer _renderer;
@@ -29,43 +30,31 @@ public class Tile : MonoBehaviour
         selectedColor = _renderer.color;
     }
 
-   
-    private void OnMouseEnter()
-    {
-       /* if (Cursor.visible)
-        {
-            _renderer.color = hLightColor;
-        }*/
-        
-        if(Snipping.Instance != null)
-        {
-            Snipping.Instance.snapCell = transform;
-         
-           
-        }
 
-    }
 
-    private void OnMouseDown()
-    {
 
-        if (Cursor.visible)
-        {
-            _renderer.color = hLightColor;
-          /*  if(PathFinder.Instance.character == null) { PathFinder.Instance.character = gameObject; }
-            else
-            {
-                PathFinder.Instance.target = gameObject;
-            }*/
+     private void OnMouseOver()
+      {
 
-           
-            
-        }
-    }
-    private void OnMouseExit()
-    {
-       // _renderer.color = selectedColor;
-    }
+
+          if (Input.GetMouseButtonDown(1))
+          {
+              if (Cursor.visible)
+              {
+
+                  if (Selector.Instance.unit != null)
+                  {
+                      Selector.Instance.target = gameObject;
+                      Selector.Instance.CallForPath();
+                  }
+              }
+          }
+
+      }
+     /* private void OnMouseExit()
+      {
+          _renderer.color = selectedColor;
+      }*/
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -99,5 +88,28 @@ public class Tile : MonoBehaviour
     public int FCost
     {
         get { return gCost + hcost; }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+
+
+        if (Cursor.visible && Selector.Instance.unit != null)
+        {
+            _renderer.color = walkable ? hLightColor : Color.red;
+           // _renderer.color = hLightColor;
+        }
+
+        if (Snipping.Instance != null)
+        {
+            Snipping.Instance.snapCell = transform;
+
+
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        _renderer.color = selectedColor;
     }
 }

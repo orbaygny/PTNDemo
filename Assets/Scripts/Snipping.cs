@@ -14,8 +14,6 @@ public class Snipping : MonoBehaviour
 
     public bool canPlace;
     private SpriteRenderer _renderer;
-
-
     private Vector3 mousePos;
     private void Awake()
     {
@@ -35,6 +33,7 @@ public class Snipping : MonoBehaviour
 
         min_X = (transform.localScale.x/2)-4;
         min_Y = (transform.localScale.y / 2)-4;
+
         //Cell Count -2 * 8 -4
         max_X = ((WorldCreator.Instance.ReturnCellCize("x")- transform.localScale.x / 16) *8)-4;
         max_Y = ((WorldCreator.Instance.ReturnCellCize("y") - transform.localScale.y / 16) * 8)-4;
@@ -63,7 +62,9 @@ public class Snipping : MonoBehaviour
             Cursor.visible = true;
             CanvasControl.Instance.OpenProdictionButton();
             _renderer.color = Color.white;
-            Destroy(GetComponent<Snipping>());
+           
+            gameObject.SendMessage("CreatedBuilding", SendMessageOptions.DontRequireReceiver);
+            Destroy(GetComponent<Snipping>());    
         }
 
         if (Input.GetMouseButtonDown(1))
@@ -74,8 +75,8 @@ public class Snipping : MonoBehaviour
         }
 
 
-
-           pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // This part to make clamp the object in game boundaries
+        pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
            pos.z = 0;
 
@@ -113,10 +114,10 @@ public class Snipping : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
        
-        if (collision.gameObject.CompareTag("Building"))
+        if (collision.gameObject.CompareTag("Building") ||collision.gameObject.layer == LayerMask.NameToLayer("Unit"))
         {
             canPlace = false;
         }
@@ -125,7 +126,7 @@ public class Snipping : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Building"))
+        if (collision.gameObject.CompareTag("Building") || collision.gameObject.layer == LayerMask.NameToLayer("Unit"))
         {
             canPlace = true;
             
