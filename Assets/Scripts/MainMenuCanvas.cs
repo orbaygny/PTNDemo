@@ -5,8 +5,14 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class MainMenuCanvas : MonoBehaviour
 {
+    
     Resolution[] resolutions;
     public Dropdown resolutionDropdown;
+
+    private void Awake()
+    {
+        Application.targetFrameRate = 60;
+    }
     private void Start()
     {
       resolutions =  Screen.resolutions;
